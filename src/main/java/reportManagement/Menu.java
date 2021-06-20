@@ -1,6 +1,7 @@
 package reportManagement;
 
 import WorbookProcessor.WorkbookScanner;
+import reports.EmployeeDetailedAnnualReport;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -71,6 +72,7 @@ public class Menu {
 				break;
 			case 3:
 				System.out.println("raport_godziny_przepracowanych_pracownik_wroku.java");
+				//EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);
 				break;
 			case 4:
 				System.out.println("raport_procentowy_zaangazowania_pracownikow_rok.java");

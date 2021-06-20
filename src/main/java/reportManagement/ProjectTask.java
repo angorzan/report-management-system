@@ -33,6 +33,4 @@ public class ProjectTask {
 		this.date = date;
 		this.hours = hours;
 	}
-
-
 }
