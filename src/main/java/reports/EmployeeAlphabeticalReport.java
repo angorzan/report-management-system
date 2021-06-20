@@ -38,10 +38,14 @@ public class EmployeeAlphabeticalReport  {
         Map<String, Float> result = new TreeMap<String, Float>(map);
 
         System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
-
+		System.out.println("______________________________________________________________");
+		System.out.printf("| %-40s | %-10s|\n", "Nazwisko i imię", "h/rok");
+        
         for (String key: result.keySet()) {
 
-            System.out.printf("\n%30s %15s", key, result.get(key) +"\n");
+
+    		System.out.println("--------------------------------------------------------------");
+    		System.out.printf("| %-40s | %-10s|\n", key, result.get(key));
 
         }
     }

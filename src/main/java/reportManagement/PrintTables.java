@@ -2,11 +2,6 @@ package reportManagement;
 
 public class PrintTables {
 	
-	public static void main(String[] args)
-	{
-		print();
-	}
-	
 	public static void print()
 	{
 		String name = "Kowalski Jan";
@@ -37,8 +32,7 @@ public class PrintTables {
 		System.out.printf("|%-5s| %-40s | %-10s|\n", lp, name, iloscGodzin);
 		System.out.printf("|%-5s| %-40s | %-10s|\n", lp, name2, iloscGodzin);
 		System.out.println("______________________________________________________________");
-		
-		
+
 		System.out.printf("\n\n\nWyświetlenie raportu godzin projektowych w danym roku:\n");
 		System.out.println("_______________________________________________________________");
 		System.out.printf("|%-5s| %-40s | %-10s|\n", "Lp", "Nazwa projektu", "ilość godzin");

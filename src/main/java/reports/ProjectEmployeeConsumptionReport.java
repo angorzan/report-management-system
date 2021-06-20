@@ -10,38 +10,42 @@ import java.util.TreeMap;
 
 public class ProjectEmployeeConsumptionReport {
 
-    private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
-    public static void printReport(String projectName){
+	private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
 
-        Map<String, Float> map = new HashMap<>();
-        for (ProjectTask p: projectTasks) {
+	public static void printReport(String projectName) {
 
-            if (p.getProjectName().equals(projectName)) {
+		Map<String, Float> map = new HashMap<>();
+		for (ProjectTask p : projectTasks) {
 
-                float hours;
-                if (map.get(p.getEmployeeName()) == null) {
-                    hours = 0;
-                } else {
-                    hours = map.get(p.getEmployeeName());
-                }
-                map.put(p.getEmployeeName(), hours + p.getHours());
-            }
-        }
-        Map<String, Float> result = new TreeMap<String, Float>(map);
+			if (p.getProjectName().equals(projectName)) {
 
-        System.out.printf("\n\nWyświetlenie raportu sumarycznego godzin projektowych:\n");
+				float hours;
+				if (map.get(p.getEmployeeName()) == null) {
+					hours = 0;
+				} else {
+					hours = map.get(p.getEmployeeName());
+				}
+				map.put(p.getEmployeeName(), hours + p.getHours());
+			}
+		}
+		Map<String, Float> result = new TreeMap<String, Float>(map);
 
-        int sumOfHours = 0;
-        for (String key: result.keySet()) {
+		int sumOfHours = 0;
 
-            System.out.printf("\n%30s %15s", key, result.get(key));
-            sumOfHours += result.get(key);
+		System.out.printf("\n\n\nWyświetlenie raportu sumarycznego godzin projektowych:\n");
+		System.out.println("______________________________________________________________________");
+		System.out.printf("|%-40s | %-20s|\n", "Nazwisko i imię", "Lączna suma godzin");
 
-        }
+		for (String key : result.keySet()) {
 
-        System.out.printf("\n\nŁączna ilość pracy nad projektem " + sumOfHours + " godzin");
+			System.out.println("----------------------------------------------------------------------");
+			System.out.printf("|%-40s | %-20s|\n", key, result.get(key));
+			sumOfHours += result.get(key);
 
+		}
 
-    }
+		System.out.printf("\n\nŁączna ilość pracy nad projektem " + sumOfHours + " godzin");
+
+	}
 
 }

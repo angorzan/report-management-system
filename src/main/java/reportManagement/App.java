@@ -12,14 +12,11 @@ public class App {
 //		menu.printMainMenu();
 		
 		EmployeeAlphabeticalReport.printReport(2012);	//raport 1
-		System.out.println("------------------------");
-		System.out.println("------------------------");
+
 		ProjectSummaryHoursReport.printReport(2012);	// raport2
-		System.out.println("------------------------");
-		System.out.println("------------------------");
+
 		EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);	// raport 3
-		System.out.println("------------------------");
-		System.out.println("------------------------");
-		ProjectEmployeeConsumptionReport.printReport("Projekt2");	// raport 4
+
+		ProjectEmployeeConsumptionReport.printReport("Projekt2");	// raport 5
 	}
 }
