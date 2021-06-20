@@ -7,7 +7,7 @@ public class ProjectTask {
 	private String sheetName;
 	private String employeeName;
 	private Date date;
-	private int hours;
+	private float hours;
 
 
 
@@ -23,11 +23,11 @@ public class ProjectTask {
 		return date;
 	}
 
-	public int getHours() {
+	public float getHours() {
 		return hours;
 	}
 
-	public ProjectTask(String sheetName, String employeeName, Date date, int hours) {
+	public ProjectTask(String sheetName, String employeeName, Date date, float hours) {
 		this.sheetName = sheetName;
 		this.employeeName = employeeName;
 		this.date = date;

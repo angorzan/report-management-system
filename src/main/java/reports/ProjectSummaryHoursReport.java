@@ -13,11 +13,11 @@ public class ProjectSummaryHoursReport {
     private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
 
     public static void printReport(int year) {
-        Map<String, Integer> map2 = new HashMap<>();
+        Map<String, Float> map2 = new HashMap<>();
         for (ProjectTask p : projectTasks) {
 
             if (p.getDate().getYear() == year) {
-                int hours;
+                float hours;
                 if (map2.get(p.getProjectName()) == null) {
                     hours = 0;
                 } else {
@@ -26,7 +26,7 @@ public class ProjectSummaryHoursReport {
                 map2.put(p.getProjectName(), hours + p.getHours());
             }
         }
-        Map<String, Integer> result = new TreeMap<String, Integer>(map2);
+        Map<String, Float> result = new TreeMap<String, Float>(map2);
 
         System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku:");
         for (String key : result.keySet()) {

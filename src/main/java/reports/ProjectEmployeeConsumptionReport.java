@@ -1,22 +1,22 @@
 package reports;
 
-import reportManagement.App;
 import reportManagement.Menu;
 import reportManagement.ProjectTask;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class EmployeeAlphabeticalReport  {
+public class ProjectEmployeeConsumptionReport {
 
     private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
-    public static void printReport(int year){
+    public static void printReport(String projectName){
 
         Map<String, Float> map = new HashMap<>();
         for (ProjectTask p: projectTasks) {
 
-            if (p.getDate().getYear() == year) {
+            if (p.getProjectName().equals(projectName)) {
 
                 float hours;
                 if (map.get(p.getEmployeeName()) == null) {
@@ -29,14 +29,19 @@ public class EmployeeAlphabeticalReport  {
         }
         Map<String, Float> result = new TreeMap<String, Float>(map);
 
-        System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
+        System.out.printf("\n\nWyświetlenie raportu sumarycznego godzin projektowych:\n");
 
+        int sumOfHours = 0;
         for (String key: result.keySet()) {
 
             System.out.printf("\n%30s %15s", key, result.get(key));
+            sumOfHours += result.get(key);
 
         }
-    }
 
+        System.out.printf("\n\nŁączna ilość pracy nad projektem " + sumOfHours + " godzin");
+
+
+    }
 
 }
