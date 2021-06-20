@@ -13,12 +13,12 @@ public class ProjectEmployeeConsumptionReport {
     private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
     public static void printReport(String projectName){
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Float> map = new HashMap<>();
         for (ProjectTask p: projectTasks) {
 
             if (p.getProjectName().equals(projectName)) {
 
-                int hours;
+                float hours;
                 if (map.get(p.getEmployeeName()) == null) {
                     hours = 0;
                 } else {
@@ -27,7 +27,7 @@ public class ProjectEmployeeConsumptionReport {
                 map.put(p.getEmployeeName(), hours + p.getHours());
             }
         }
-        Map<String, Integer> result = new TreeMap<String, Integer>(map);
+        Map<String, Float> result = new TreeMap<String, Float>(map);
 
         System.out.printf("\n\nWyświetlenie raportu sumarycznego godzin projektowych:\n");
 
