@@ -7,6 +7,12 @@ public class Menu {
     public static void main( String[] args )
     {
     	
+    	printMenu();
+
+    }
+    
+    public static void printMenu() {
+    	
 		Scanner scanner = new Scanner(System.in);
 		
     	System.out.println("****************************************************************************");
@@ -30,7 +36,6 @@ public class Menu {
 		} catch (Exception e) {
 			
 		}
-
     }
     
 	public static void chooseOption(int choice) {
