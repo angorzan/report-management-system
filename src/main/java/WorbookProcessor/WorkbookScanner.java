@@ -1,7 +1,8 @@
 package WorbookProcessor;
 
 import org.apache.poi.ss.usermodel.*;
-import reportManagement.reportManagement.App;
+import reportManagement.Menu;
+import reportManagement.ProjectTask;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class WorkbookScanner {
     public static void scanWorkbook(Path path) {
 
         Workbook workbook = WorkbookLoader.openWorkbook(path);
-        ArrayList<ProjectTask> list = App.getProjectTask();
+        ArrayList<ProjectTask> list = Menu.getProjectTasks();
 
         for (Sheet sheet : workbook) {
 
