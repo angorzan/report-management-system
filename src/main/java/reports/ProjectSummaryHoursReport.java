@@ -4,6 +4,7 @@ import reportManagement.Menu;
 import reportManagement.ProjectTask;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,7 +17,13 @@ public class ProjectSummaryHoursReport {
         Map<String, Float> map2 = new HashMap<>();
         for (ProjectTask p : projectTasks) {
 
-            if (p.getDate().getYear() == year) {
+        	Calendar calendar = Calendar.getInstance();
+        	
+        	calendar.setTime(p.getDate());
+        	
+        	int result = calendar.get(Calendar.YEAR);
+        	
+            if (result == year) {
                 float hours;
                 if (map2.get(p.getProjectName()) == null) {
                     hours = 0;
@@ -28,11 +35,10 @@ public class ProjectSummaryHoursReport {
         }
         Map<String, Float> result = new TreeMap<String, Float>(map2);
 
-        System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku:");
+        System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku: \n");
         for (String key : result.keySet()) {
 
-            System.out.println("" + key + " " + result.get(key));
-            System.out.printf("\n%30s %15s", key, result.get(key));
+            System.out.printf("\n%30s %15s", key, result.get(key) + "\n");
         }
     }
 
