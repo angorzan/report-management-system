@@ -15,6 +15,7 @@ public class PrintTables {
 		int iloscGodzin = 30;
 		String month = "miesiąc";
 		String percent = "%";
+		int lp = 1;
 		
 //		int namelength = name.length();
 //		int name2length = name2.length();
@@ -25,29 +26,19 @@ public class PrintTables {
 //			nameLengthMax = name2length;
 //			
 //		}
-		String format = "%-20.50s %-50.30s\\n";
 		
 		
 		System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
-		System.out.println("------------------------------------------------------");
-		//System.out.println("Nazwisko i imię \t\t|\t\th/rok");
-		System.out.printf("| %-40s | %-15s|\n", "Nazwisko i imię", "h/rok");
-		System.out.printf("| %-40s | %-15s|\n", name, iloscGodzin);
-		System.out.printf("| %-40s | %-15s|\n", name2, iloscGodzin);
-		System.out.println("------------------------------------------------------");
+		System.out.println("______________________________________________________________");
+		System.out.printf("|%-5s| %-40s | %-10s|\n", "Lp", "Nazwisko i imię", "h/rok");
+		System.out.println("--------------------------------------------------------------");
+		System.out.printf("|%-5s| %-40s | %-10s|\n", lp, name, iloscGodzin);
+		System.out.printf("|%-5s| %-40s | %-10s|\n", lp, name2, iloscGodzin);
+		System.out.println("______________________________________________________________");
 		
-		
-		System.out.println("\n\n\n\n\n\n");
-		
-		
-		System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
-		System.out.println("------------------------------------------------------");
-		System.out.println("Nazwisko i imię \t\t|\t\th/rok");
-		System.out.printf("%s %35s\n",name, iloscGodzin);	
-		System.out.printf("%s %35s\n",name2, iloscGodzin);
-		System.out.println("------------------------------------------------------");
 		
 		System.out.printf("\n\n\nWyświetlenie raportu godzin projektowych w danym roku:\n");
+		System.out.println("______________________________________________________________");
 		System.out.println("------------------------------------------------------");
 		System.out.println("\nNazwa projektu\t\t\tilość godzin");
 		System.out.printf("%s %25s\n", projectName, iloscGodzin);
