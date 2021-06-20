@@ -6,13 +6,11 @@ import reportManagement.ProjectTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class EmployeeAlphabeticalReport  {
 
     private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
-
-
-
     public static void printReport(int year){
 
         Map<String, Integer> map = new HashMap<>();
@@ -29,13 +27,13 @@ public class EmployeeAlphabeticalReport  {
                 map.put(p.getEmployeeName(), hours + p.getHours());
             }
         }
+        Map<String, Integer> result = new TreeMap<String, Integer>(map);
 
         System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
 
-        for (String key: map.keySet()) {
+        for (String key: result.keySet()) {
 
-
-            System.out.printf("\nLp%15s %30s %15s", key, map.get(key));
+            System.out.printf("\n%30s %15s", key, result.get(key));
 
         }
     }

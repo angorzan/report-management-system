@@ -6,6 +6,7 @@ import reportManagement.ProjectTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ProjectSummaryHoursReport {
 
@@ -25,11 +26,13 @@ public class ProjectSummaryHoursReport {
                 map2.put(p.getProjectName(), hours + p.getHours());
             }
         }
-        System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku:");
-        for (String key : map2.keySet()) {
+        Map<String, Integer> result = new TreeMap<String, Integer>(map2);
 
-            System.out.println("" + key + " " + map2.get(key));
-            System.out.printf("\nLp%15s %30s %15s", key, map2.get(key));
+        System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku:");
+        for (String key : result.keySet()) {
+
+            System.out.println("" + key + " " + result.get(key));
+            System.out.printf("\n%30s %15s", key, result.get(key));
         }
     }
 
