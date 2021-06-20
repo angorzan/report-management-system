@@ -8,7 +8,7 @@ public class App {
 		Menu menu = new Menu("src/test/resources/reporter-dane");
 		EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);
 		//menu.printMainMenu();
-		
-		
+		menu.printMainMenu();
+
 	}
 }
