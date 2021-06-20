@@ -13,7 +13,9 @@ public class Menu {
 
 	private static ArrayList<ProjectTask> projectTasks;
 
+	
 	public Menu(String path) {
+		projectTasks = new ArrayList<ProjectTask>();
 		this.scanLocation(path);
 	}
 
@@ -27,7 +29,7 @@ public class Menu {
 				scanLocation(newPath);
 			}
 
-			if (file.getName().endsWith(".xlsx")) {
+			if (file.getName().endsWith(".xls")) {
 				WorkbookScanner.scanWorkbook(Paths.get(file.getAbsolutePath()));
 			}
 		}
