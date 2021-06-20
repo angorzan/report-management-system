@@ -1,7 +1,10 @@
 package reportManagement;
 
 import WorbookProcessor.WorkbookScanner;
+import reports.EmployeeAlphabeticalReport;
 import reports.EmployeeDetailedAnnualReport;
+import reports.ProjectEmployeeConsumptionReport;
+import reports.ProjectSummaryHoursReport;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -68,16 +71,22 @@ public class Menu {
 		switch(choice) {
 			case 1:
 				System.out.println("raport_sumaryczny_godzin_projektowych_rok.java");
+				
+				EmployeeAlphabeticalReport.printReport(2012);
 				break;
 			case 2:
 				System.out.println("raport_godziny_projektowych_wroku.java");
+				ProjectSummaryHoursReport.printReport(2012);
+				
 				break;
 			case 3:
 				System.out.println("raport_godziny_przepracowanych_pracownik_wroku.java");
-				//EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);
+				
+				EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);
 				break;
 			case 4:
 				System.out.println("raport_procentowy_zaangazowania_pracownikow_rok.java");
+				ProjectEmployeeConsumptionReport.printReport("Projekt1");
 				break;
 			case 5:
 				System.out.println("raport_sumaryczny_godzin_projektowych_rok.java");
