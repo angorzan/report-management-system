@@ -11,7 +11,15 @@ public class Menu {
 		
     	System.out.println("****************************************************************************");
 		System.out.println("Witaj uzytkowniku! To super raport do generowania statystyk w Twojej firmie!");
-		System.out.println("****************************************************************************");
+		System.out.println("**************************************************************************** \n");
+		System.out.println("Wybierz opcje:");
+		System.out.println("1. Generuj alfabetyczny raport godzin pracowników w danym roku (pytanie o rok - jakie lata, )");
+		System.out.println("2. Generuj raport godzin projektowych w podanym roku");
+		System.out.println("3. Generuj miesięczny raport godzin przepracowanych przez wybranego pracownika");
+		System.out.println("4. Generuj procentowy udział godzinowy w projektach dla danego pracownika");
+		System.out.println("5. Generuj sumaryczny raport godzin projektowych ");
+		System.out.println("6. Wygeneruj całościowy raport");
+		System.out.println("0. Zakończ prace z programem \n");
 		
 		System.out.println("Wpisz numer typu raportu:");
 		
