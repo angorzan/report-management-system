@@ -16,9 +16,12 @@ public class Menu {
 
 	private static ArrayList<ProjectTask> projectTasks;
 
+	private Scanner scanner;
+
 	public Menu(String path) {
 		projectTasks = new ArrayList<ProjectTask>();
 		this.scanLocation(path);
+		scanner = new Scanner(System.in);
 	}
 
 	private void scanLocation(String path) {
@@ -38,8 +41,7 @@ public class Menu {
 
 	}
 
-	public static void printMainMenu() {
-		Scanner scanner = new Scanner(System.in);
+	public void printMainMenu() {
 
 		System.out.println("****************************************************************************");
 		System.out.println("Witaj uzytkowniku! To super raport do generowania statystyk w Twojej firmie!");
@@ -56,34 +58,16 @@ public class Menu {
 		System.out.println("Wpisz numer typu raportu:");
 
 		try {
-			int reportType = scanner.nextInt();
+			int reportType = Integer.parseInt(scanner.nextLine());
 			chooseOption(reportType);
 
 		} catch (Exception e) {
 
 		}
 	}
-	
-	public static int getYearForGenerateReport() {
-        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Podaj rok z którego chcesz wygenerować raport: ");
-        return scanner.nextInt();
-	}
-	
-	public static String getNameAndSurnameForReport() {
-        Scanner scanner = new Scanner(System.in);
-//		System.out.println("Podaj imie pracownika w formacie: Imie Nazwisko");
-        return scanner.nextLine();
-	}
-	
-	public static String getProjectNameForReport() {
-        Scanner scanner = new Scanner(System.in);
-//		System.out.println("Podaj nazwe projektu dla ktorego chcesz wyswietlic raport:");
-        return scanner.nextLine();
-	}
-	
-public static void whatDoYouWantToDoNext() {
-		
+
+	private void whatDoYouWantToDoNext() {
+
 		System.out.println("\n Wybierz co chcesz zrobic:");
 		System.out.println("0 - przejscie do menu glownego");
 		System.out.println("1 - eksport danych do pliku PDF");
@@ -91,55 +75,65 @@ public static void whatDoYouWantToDoNext() {
 //		System.out.println("3 - wybierz innego pracownika");
 		System.out.println("9 - zakonczenie pracy programu");
 		System.out.print("Wpisz swoj wybor: ");
-		
-        Scanner scanner = new Scanner(System.in);
-        String showMenu = scanner.nextLine();
-        
-        try {
-        	if (showMenu.equals("0")){
-        		printMainMenu();
-            } else if(showMenu.equals("1")){
-            	System.out.println("Generowanie pliku PDF...");
+
+		int showMenu = Integer.parseInt(scanner.nextLine());
+
+		try {
+			if (showMenu == 0) {
+				printMainMenu();
+			} else if (showMenu == 1) {
+				System.out.println("Generowanie pliku PDF...");
 //            	PDFExporter();
-            } else if(showMenu.equals("9")){
-            	System.out.println("Koniec pracy programu. Dziekuje!");
-            	System.exit(0);
-            }
-        } catch(InputMismatchException e) {
-        	System.out.println("Nie wpisales liczby takiej jak wymagana!");
-        }
-        
+			} else if (showMenu == 9) {
+				System.out.println("Koniec pracy programu. Dziekuje!");
+				System.exit(0);
+			} else {
+
+				System.out.println("Wpisales niepoprawny numer, wpisz jeszcze raz.");
+
+				whatDoYouWantToDoNext();
+			}
+
+		} catch (InputMismatchException e) {
+			System.out.println("Nie wpisales liczby takiej jak wymagana!");
+		}
+
 	}
 
-	public static void chooseOption(int choice) {
+	private void chooseOption(int choice) {
 
 		switch (choice) {
 		case 1:
 			System.out.print("Podaj rok z którego chcesz wygenerować raport: ");
-			EmployeeAlphabeticalReport.printReport(getYearForGenerateReport());
+			EmployeeAlphabeticalReport.printReport(Integer.parseInt(scanner.nextLine()));
 			break;
 		case 2:
 			System.out.print("Podaj rok z którego chcesz wygenerować raport: ");
-			ProjectSummaryHoursReport.printReport(getYearForGenerateReport());
+			ProjectSummaryHoursReport.printReport(Integer.parseInt(scanner.nextLine()));
 			break;
 		case 3:
 			System.out.println("Podaj imie pracownika w formacie: Imie Nazwisko");
-			String empName = getNameAndSurnameForReport();
+			String empName = scanner.nextLine();
+
 			System.out.println("Podaj rok z ktorego chcesz wygenerowac raport");
-			int year = getYearForGenerateReport(); 
-			
+			int year = Integer.parseInt(scanner.nextLine());
+
 			EmployeeDetailedAnnualReport.printReport(empName, year);
 			break;
 		case 4:
 			System.out.println("raport_sumaryczny_godzin_projektowych_rok.java");
 			break;
 		case 5:
-			System.out.print("Podaj nazwe projektu dla ktorego chcesz wyswietlic raport:");
-			ProjectEmployeeConsumptionReport.printReport(getProjectNameForReport());
+
+			System.out.println("Podaj nazwe projektu dla ktorego chcesz wyswietlic raport:");
+
+			String projectName = scanner.nextLine();
+
+			ProjectEmployeeConsumptionReport.printReport(projectName);
 			break;
 		case 0:
-        	System.out.println("Koniec pracy programu. Dziekuje!");
-            System.exit(0);
+			System.out.println("Koniec pracy programu. Dziekuje!");
+			System.exit(0);
 		default:
 			System.out.println("Nie ma takiego raportu do wyboru. Sprobuj ponownie.");
 			printMainMenu();

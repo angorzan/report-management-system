@@ -37,7 +37,7 @@ public class EmployeeAlphabeticalReport  {
         }
         Map<String, Float> result = new TreeMap<String, Float>(map);
 
-        System.out.println("Wyświetlenie raportu godzin pracownikow w danym roku:");
+        System.out.println("Wyświetlenie raportu godzin pracownikow w roku: " + year);
 		System.out.println("______________________________________________________________");
 		System.out.printf("| %-40s | %-10s|\n", "Nazwisko i imię", "h/rok");
         

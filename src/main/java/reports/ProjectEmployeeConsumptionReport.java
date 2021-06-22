@@ -32,7 +32,7 @@ public class ProjectEmployeeConsumptionReport {
 
 		int sumOfHours = 0;
 
-		System.out.printf("\n\n\nWyświetlenie raportu sumarycznego godzin projektowych:\n");
+		System.out.printf("\n\n\nWyświetlenie raportu sumarycznego godzin projektowych dla projektu " + projectName + ":\n");
 		System.out.println("______________________________________________________________________");
 		System.out.printf("|%-40s | %-20s|\n", "Nazwisko i imię", "Lączna suma godzin");
 
@@ -45,7 +45,8 @@ public class ProjectEmployeeConsumptionReport {
 		}
 
 		System.out.printf("\n\nŁączna ilość pracy nad projektem " + sumOfHours + " godzin");
-
+		System.out.println();
+		System.out.println();
 	}
 
 }

@@ -35,13 +35,13 @@ public class ProjectSummaryHoursReport {
 		}
 		Map<String, Float> result = new TreeMap<String, Float>(map2);
 
-		System.out.printf("\n\nWyswietlenie raportu godzin projektowych w danym roku: \n");
+		System.out.printf("\n\nWyswietlenie raportu godzin projektowych w roku: " + year + "\n");
 		System.out.println("_______________________________________________________________");
-		System.out.printf("| %-40s | %-10s|\n", "Nazwa projektu", "ilość godzin");
+		System.out.printf("| %-40s | %-12s |\n", "Nazwa projektu", "ilość godzin");
 		System.out.println("----------------------------------------------------------------");
 		for (String key : result.keySet()) {
 
-			System.out.printf("| %-40s | %-12s|\n", key, result.get(key));
+			System.out.printf("| %-40s | %-13s|\n", key, result.get(key));
 		}
 	}
 
