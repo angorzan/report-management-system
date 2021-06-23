@@ -9,35 +9,46 @@ import reportManagement.Menu;
 import reportManagement.ProjectTask;
 import utilities.MonthsConversionTable;
 
-public class EmployeeDetailedAnnualReport {
+public class EmployeeDetailedAnnualReport implements IReport {
 
-	public static void printReport(String employeeName, int year) {
+	private static final String HASH_SPLITTER = "#";
+
+	private String name;
+
+	private int year;
+
+	public EmployeeDetailedAnnualReport(String empName, int year) {
+		this.name = empName;
+		this.year = year;
+
+	}
+
+	public void printReport() {
+
 		System.out.println();
-		System.out.printf("\n\n\nWyświetlenie miesięcznego raportu godzin przepracowanych przez " + employeeName
-				+ " w roku: " + year + "\n");
+		System.out.printf("\n\n\nWyświetlenie miesięcznego raportu godzin przepracowanych przez " + this.name
+				+ " w roku: " + this.year + "\n");
 		System.out.println("________________________________________________________________________________________");
 		System.out.printf("|%-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "ilość godzin");
 
-		ArrayList<ProjectTask> projects = findData(employeeName, year);
+		ArrayList<String> fullHashes = findData();
 
-		for (ProjectTask p : projects) {
+		for (String s : fullHashes) {
 
-			String key = hasher(p);
-
-			String[] projectName = key.split("#");
+			String[] toPrint = s.split(HASH_SPLITTER);
 
 			System.out
 					.println("---------------------------------------------------------------------------------------");
 			System.out.printf("|%-20s| %-40s | %-15s|\n",
-					MonthsConversionTable.MONTHS_NAME[Integer.parseInt(projectName[0])], projectName[1], p.getHours());
+					MonthsConversionTable.MONTHS_NAME[Integer.parseInt(toPrint[0])], toPrint[1], toPrint[2]);
 
 		}
 
 	}
 
-	private static ArrayList<ProjectTask> findData(String employeeName, int year) {
+	private ArrayList<String> findData() {
 
-		HashMap<String, ProjectTask> foundProjectTasks = new HashMap<String, ProjectTask>();
+		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();
 
 		for (ProjectTask p : Menu.getProjectTasks()) {
@@ -45,26 +56,25 @@ public class EmployeeDetailedAnnualReport {
 			calendar.setTime(p.getDate());
 
 			int resultYear = calendar.get(Calendar.YEAR);
+
 			String key = hasher(p);
-			if (p.getEmployeeName().equals(employeeName) && resultYear == year) {
+
+			if (p.getEmployeeName().equals(this.name) && resultYear == this.year) {
 
 				if (!foundProjectTasks.containsKey(key)) {
 
-					foundProjectTasks.put(key, p);
+					foundProjectTasks.put(key, p.getHours());
+
 				} else {
 
-					for (String k : foundProjectTasks.keySet()) {
-
-						if (hasher(foundProjectTasks.get(k)).equals(hasher(p))) {
-							foundProjectTasks.get(key).setHours(foundProjectTasks.get(key).getHours() + p.getHours());
-						}
-
-					}
+					foundProjectTasks.put(key, foundProjectTasks.get(key) + p.getHours());
 
 				}
+
 			}
+
 		}
-		ArrayList<ProjectTask> sortedProjectTasksList = hashMapToArrayListSorted(foundProjectTasks);
+		ArrayList<String> sortedProjectTasksList = hashMapToArrayListSorted(foundProjectTasks);
 		return sortedProjectTasksList;
 	}
 
@@ -74,26 +84,27 @@ public class EmployeeDetailedAnnualReport {
 
 		calendar.setTime(projectTask.getDate());
 
-		String key = calendar.get(Calendar.MONTH) + "#" + projectTask.getProjectName();
+		String key = calendar.get(Calendar.MONTH) + HASH_SPLITTER + projectTask.getProjectName();
 
 		return key;
 	}
 
-	private static ArrayList<ProjectTask> hashMapToArrayListSorted(HashMap<String, ProjectTask> map) {
-		ArrayList<String> arrayListHashes = new ArrayList<String>();
-		ArrayList<ProjectTask> arrayListProjectTasksSorted = new ArrayList<ProjectTask>();
+	private static String fullHasher(String hash, String hour) {
+		String fullHash = hash + HASH_SPLITTER + hour;
+		return fullHash;
+	}
+
+	private static ArrayList<String> hashMapToArrayListSorted(HashMap<String, Float> map) {
+		ArrayList<String> arrayListFullHashes = new ArrayList<String>();
 
 		for (String k : map.keySet()) {
-			arrayListHashes.add(k);
+
+			arrayListFullHashes.add(fullHasher(k, Float.toString(map.get(k))));
 		}
 
-		Collections.sort(arrayListHashes);
+		Collections.sort(arrayListFullHashes);
 
-		for (String s : arrayListHashes) {
-			arrayListProjectTasksSorted.add(map.get(s));
-		}
-
-		return arrayListProjectTasksSorted;
+		return arrayListFullHashes;
 	}
 
 }

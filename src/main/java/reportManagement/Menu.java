@@ -1,10 +1,7 @@
 package reportManagement;
 
 import WorbookProcessor.WorkbookScanner;
-import reports.EmployeeAlphabeticalReport;
-import reports.EmployeeDetailedAnnualReport;
-import reports.ProjectEmployeeConsumptionReport;
-import reports.ProjectSummaryHoursReport;
+import reports.*;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -14,12 +11,12 @@ import java.util.Scanner;
 
 public class Menu {
 
-	private static ArrayList<ProjectTask> projectTasks;
+	private static final ArrayList<ProjectTask> projectTasks = new ArrayList<ProjectTask>();
 
 	private Scanner scanner;
 
 	public Menu(String path) {
-		projectTasks = new ArrayList<ProjectTask>();
+//		projectTasks = new ArrayList<ProjectTask>();
 		this.scanLocation(path);
 		scanner = new Scanner(System.in);
 	}
@@ -105,11 +102,15 @@ public class Menu {
 		switch (choice) {
 		case 1:
 			System.out.print("Podaj rok z którego chcesz wygenerować raport: ");
-			EmployeeAlphabeticalReport.printReport(Integer.parseInt(scanner.nextLine()));
+			IReport reportEAR = new EmployeeAlphabeticalReport(Integer.parseInt(scanner.nextLine()));
+			reportEAR.printReport();
 			break;
 		case 2:
 			System.out.print("Podaj rok z którego chcesz wygenerować raport: ");
-			ProjectSummaryHoursReport.printReport(Integer.parseInt(scanner.nextLine()));
+			
+			IReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
+			projectPSHR.printReport();
+			
 			break;
 		case 3:
 			System.out.println("Podaj imie pracownika w formacie: Imie Nazwisko");
@@ -118,7 +119,8 @@ public class Menu {
 			System.out.println("Podaj rok z ktorego chcesz wygenerowac raport");
 			int year = Integer.parseInt(scanner.nextLine());
 
-			EmployeeDetailedAnnualReport.printReport(empName, year);
+			IReport reportEDAR = new EmployeeDetailedAnnualReport(empName, year);
+			reportEDAR.printReport();
 			break;
 		case 4:
 			System.out.println("raport_sumaryczny_godzin_projektowych_rok.java");
@@ -127,9 +129,8 @@ public class Menu {
 
 			System.out.println("Podaj nazwe projektu dla ktorego chcesz wyswietlic raport:");
 
-			String projectName = scanner.nextLine();
-
-			ProjectEmployeeConsumptionReport.printReport(projectName);
+			ProjectEmployeeConsumptionReport projectPECR = new ProjectEmployeeConsumptionReport(scanner.nextLine());
+			projectPECR.printReport();
 			break;
 		case 0:
 			System.out.println("Koniec pracy programu. Dziekuje!");

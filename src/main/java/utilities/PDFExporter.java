@@ -8,22 +8,20 @@ import java.util.ArrayList;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
 import org.apache.pdfbox.util.Matrix;
 
-import reports.EmployeeDetailedAnnualReport;
+import reports.IReport;
 
 public final class PDFExporter {
 	private PDFExporter() {
 	}
 
-	public static void generatePDF() throws IOException {
+	public static void generatePDF(IReport report) throws IOException {
 
-		String capturedString = captureString();
+		String capturedString = captureString(report);
 
 		ArrayList<String> lines = filtrString(capturedString);
 
@@ -43,15 +41,19 @@ public final class PDFExporter {
 				contents.beginText();
 				contents.setFont(font, 10);
 				contents.newLineAtOffset(40, -40);
-
+				
+				contents.showText("© Super raport do generowania statystyk w Twojej firmie!");
+				
+				contents.newLineAtOffset(0, -25);
+				
 				for (String s : lines) {
-					System.out.println(s);
 
 					contents.showText(s);
 
 					contents.newLineAtOffset(0, -16);
 
 				}
+				
 
 				contents.endText();
 			}
@@ -60,13 +62,13 @@ public final class PDFExporter {
 		}
 	}
 
-	private static String captureString() {
+	private static String captureString(IReport report) {
 
 		PrintStream standardOut = System.out;
 		ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStreamCaptor));
 
-		EmployeeDetailedAnnualReport.printReport("Jan Kowalski", 2012);
+		report.printReport();
 
 		System.setOut(standardOut);
 

@@ -8,16 +8,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ProjectEmployeeConsumptionReport {
+public class ProjectEmployeeConsumptionReport implements IReport {
 
-	private static ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+	private String projectName;
 
-	public static void printReport(String projectName) {
+	private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+
+	public ProjectEmployeeConsumptionReport(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public void printReport() {
 
 		Map<String, Float> map = new HashMap<>();
 		for (ProjectTask p : projectTasks) {
 
-			if (p.getProjectName().equals(projectName)) {
+			if (p.getProjectName().equals(this.projectName)) {
 
 				float hours;
 				if (map.get(p.getEmployeeName()) == null) {
@@ -32,7 +38,8 @@ public class ProjectEmployeeConsumptionReport {
 
 		int sumOfHours = 0;
 
-		System.out.printf("\n\n\nWyświetlenie raportu sumarycznego godzin projektowych dla projektu " + projectName + ":\n");
+		System.out.printf(
+				"\n\n\nWyświetlenie raportu sumarycznego godzin projektowych dla projektu " + this.projectName + ":\n");
 		System.out.println("______________________________________________________________________");
 		System.out.printf("|%-40s | %-20s|\n", "Nazwisko i imię", "Lączna suma godzin");
 
@@ -44,7 +51,7 @@ public class ProjectEmployeeConsumptionReport {
 
 		}
 
-		System.out.printf("\n\nŁączna ilość pracy nad projektem " + sumOfHours + " godzin");
+		System.out.printf("\n\nŁączna ilość pracy nad projektem " + this.projectName + ": " + sumOfHours + " godzin");
 		System.out.println();
 		System.out.println();
 	}

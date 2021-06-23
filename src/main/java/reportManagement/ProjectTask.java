@@ -9,12 +9,6 @@ public class ProjectTask {
 	private Date date;
 	private float hours;
 
-
-
-	public void setHours(float hours) {
-		this.hours = hours;
-	}
-
 	public String getProjectName() {
 		return sheetName;
 	}
