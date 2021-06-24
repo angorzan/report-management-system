@@ -21,16 +21,19 @@ public class EmployeeProjectEngagementReport implements IReport {
 		this.year = year;
 	}
 
+    public String getReportName() {
+    	return "EmployeeProjectEngagementReport" + "_" + this.year;
+    }
+	
 	public void printReport() {
 
 		System.out.println();
-		System.out.printf("\n\n\nWyświetlenie zaangażowania rocznego pracowników " + " w dany projekt w roku: "
-				+ this.year + "\n");
+		System.out.printf("\n\nZaangażowanie pracowników w projekty w roku " + this.year + "\n");
 		System.out.println(
 				"______________________________________________________________________________________________________________");
-		System.out.printf("| %-40s| %-40s | %-20s|\n", "Imię i nazwisko", "Nazwa projektu", "zaangażowanie %");
+		System.out.printf("| %-40s| %-40s | %-20s|\n", "Imię i nazwisko", "Nazwa projektu", "Zaangażowanie %");
 
-		ArrayList<String> projectEngagement = findData();
+		ArrayList<String> projectEngagement = getData();
 
 		for (String s : projectEngagement) {
 			float totalHours = 0;
@@ -53,7 +56,7 @@ public class EmployeeProjectEngagementReport implements IReport {
 		}
 	}
 
-	private ArrayList<String> findData() {
+	private ArrayList<String> getData() {
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 
 		Calendar calendar = Calendar.getInstance();

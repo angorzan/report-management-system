@@ -23,15 +23,19 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 	}
 
+    public String getReportName() {
+    	return "EmployeeDetailedAnnualReport" + "_" + this.year + "_" + this.name;
+    }
+	
 	public void printReport() {
 
 		System.out.println();
-		System.out.printf("\n\n\nWyświetlenie miesięcznego raportu godzin przepracowanych przez " + this.name
-				+ " w roku: " + this.year + "\n");
+		System.out.printf("\n\nZestawienie miesięczne godzin przepracowanych przez " + this.name.toUpperCase()
+				+ " w roku " + this.year + "\n");
 		System.out.println("______________________________________________________________________________________");
-		System.out.printf("| %-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "ilość godzin");
+		System.out.printf("| %-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "Ilość godzin");
 
-		ArrayList<String> fullHashes = findData();
+		ArrayList<String> fullHashes = getData();
 
 		for (String s : fullHashes) {
 
@@ -46,7 +50,7 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 	}
 
-	private ArrayList<String> findData() {
+	private ArrayList<String> getData() {
 
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();
@@ -59,7 +63,7 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 			String hash = hasher(p);
 
-			if (p.getEmployeeName().equals(this.name) && resultYear == this.year) {
+			if (p.getEmployeeName().toLowerCase().equals(this.name.toLowerCase()) && resultYear == this.year) {
 
 				if (!foundProjectTasks.containsKey(hash)) {
 
