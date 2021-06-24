@@ -20,9 +20,9 @@ public class ProjectSummaryHoursReport implements IReport {
 
 	public void printReport() {
 		Map<String, Float> result = getData();
-		System.out.printf("\n\nWyswietlenie raportu godzin projektowych w " + this.year + " roku: \n");
+		System.out.printf("\n\nZestawienie godzin projektowych dla projektów w " + this.year + " roku \n");
 		System.out.println("_________________________________________________________________");
-		System.out.printf("| %-40s | %-15s|\n", "Nazwa projektu", "ilość godzin");
+		System.out.printf("| %-40s | %-15s|\n", "Nazwa projektu", "Liczba godzin");
 		System.out.println("-----------------------------------------------------------------");
 		for (String key : result.keySet()) {
 			System.out.printf("| %-40s | %-15s|\n", key, result.get(key));

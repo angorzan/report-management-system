@@ -2,6 +2,7 @@ package reports;
 
 import reportManagement.Menu;
 import reportManagement.ProjectTask;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -10,48 +11,55 @@ import java.util.TreeMap;
 
 public class EmployeeAlphabeticalReport implements IReport {
 
-	private int year;
+    private int year;
 
-	private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+    private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
 
-	public EmployeeAlphabeticalReport(int year) {
-		this.year = year;
-	}
+    public EmployeeAlphabeticalReport(int year) {
+        this.year = year;
+    }
 
-	public void printReport() {
+    public void printReport() {
 
-		Map<String, Float> map = new HashMap<>();
-		for (ProjectTask p : projectTasks) {
 
-			Calendar calendar = Calendar.getInstance();
+        Map<String, Float> result = getData();
 
-			calendar.setTime(p.getDate());
+        System.out.println("\n\nZestawienie godzin projektowych dla pracownikow w roku " + this.year);
+        System.out.println("____________________________________________________________");
+        System.out.printf("| %-40s | %-10s|\n", "Imię i nazwisko", "h/rok");
 
-			int result = calendar.get(Calendar.YEAR);
+        for (String key : result.keySet()) {
 
-			if (result == this.year) {
+            System.out.println("------------------------------------------------------------");
+            System.out.printf("| %-40s | %-10s|\n", key, result.get(key));
 
-				float hours;
-				if (map.get(p.getEmployeeName()) == null) {
-					hours = 0;
-				} else {
-					hours = map.get(p.getEmployeeName());
-				}
-				map.put(p.getEmployeeName(), hours + p.getHours());
-			}
-		}
-		Map<String, Float> result = new TreeMap<String, Float>(map);
+        }
+    }
 
-		System.out.println("Wyświetlenie raportu godzin pracownikow w roku: " + this.year);
-		System.out.println("____________________________________________________________");
-		System.out.printf("| %-40s | %-10s|\n", "Nazwisko i imię", "h/rok");
+    public Map<String, Float> getData() {
 
-		for (String key : result.keySet()) {
+        Map<String, Float> map = new HashMap<>();
+        for (ProjectTask p : projectTasks) {
 
-			System.out.println("------------------------------------------------------------");
-			System.out.printf("| %-40s | %-10s|\n", key, result.get(key));
+            Calendar calendar = Calendar.getInstance();
 
-		}
-	}
+            calendar.setTime(p.getDate());
 
+            int result = calendar.get(Calendar.YEAR);
+
+            if (result == this.year) {
+
+                float hours;
+                if (map.get(p.getEmployeeName()) == null) {
+                    hours = 0;
+                } else {
+                    hours = map.get(p.getEmployeeName());
+                }
+                map.put(p.getEmployeeName(), hours + p.getHours());
+            }
+        }
+        return new TreeMap<String, Float>(map);
+    }
 }
+
+

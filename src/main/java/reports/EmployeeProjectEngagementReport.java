@@ -24,11 +24,10 @@ public class EmployeeProjectEngagementReport implements IReport {
 	public void printReport() {
 
 		System.out.println();
-		System.out.printf("\n\n\nWyświetlenie zaangażowania rocznego pracowników " + " w dany projekt w roku: "
-				+ this.year + "\n");
+		System.out.printf("\n\nZaangażowanie pracowników w projekty w roku " + this.year + "\n");
 		System.out.println(
 				"______________________________________________________________________________________________________________");
-		System.out.printf("| %-40s| %-40s | %-20s|\n", "Imię i nazwisko", "Nazwa projektu", "zaangażowanie %");
+		System.out.printf("| %-40s| %-40s | %-20s|\n", "Imię i nazwisko", "Nazwa projektu", "Zaangażowanie %");
 
 		ArrayList<String> projectEngagement = findData();
 
