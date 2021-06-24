@@ -123,7 +123,11 @@ public class Menu {
 			reportEDAR.printReport();
 			break;
 		case 4:
-			System.out.println("raport_sumaryczny_godzin_projektowych_rok.java");
+			System.out.println("Podaj rok z ktorego chcesz wygenerowac raport");
+			
+			IReport reportEPER = new EmployeeProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
+			reportEPER.printReport();
+			
 			break;
 		case 5:
 

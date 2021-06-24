@@ -43,12 +43,12 @@ public class EmployeeAlphabeticalReport implements IReport {
 		Map<String, Float> result = new TreeMap<String, Float>(map);
 
 		System.out.println("Wyświetlenie raportu godzin pracownikow w roku: " + this.year);
-		System.out.println("______________________________________________________________");
+		System.out.println("____________________________________________________________");
 		System.out.printf("| %-40s | %-10s|\n", "Nazwisko i imię", "h/rok");
 
 		for (String key : result.keySet()) {
 
-			System.out.println("--------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------");
 			System.out.printf("| %-40s | %-10s|\n", key, result.get(key));
 
 		}

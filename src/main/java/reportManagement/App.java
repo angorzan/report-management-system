@@ -2,6 +2,10 @@ package reportManagement;
 
 import java.io.IOException;
 
+import reports.*;
+import utilities.BarChart;
+import utilities.PDFExporter;
+
 public class App {
 	public static void main(String[] args) throws IOException {
 

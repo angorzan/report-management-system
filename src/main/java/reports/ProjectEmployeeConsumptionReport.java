@@ -40,13 +40,13 @@ public class ProjectEmployeeConsumptionReport implements IReport {
 
 		System.out.printf(
 				"\n\n\nWyświetlenie raportu sumarycznego godzin projektowych dla projektu " + this.projectName + ":\n");
-		System.out.println("______________________________________________________________________");
-		System.out.printf("|%-40s | %-20s|\n", "Nazwisko i imię", "Lączna suma godzin");
+		System.out.println("_____________________________________________________________________");
+		System.out.printf("| %-40s | %-20s|\n", "Nazwisko i imię", "Lączna suma godzin");
 
 		for (String key : result.keySet()) {
 
-			System.out.println("----------------------------------------------------------------------");
-			System.out.printf("|%-40s | %-20s|\n", key, result.get(key));
+			System.out.println("---------------------------------------------------------------------");
+			System.out.printf("| %-40s | %-20s|\n", key, result.get(key));
 			sumOfHours += result.get(key);
 
 		}

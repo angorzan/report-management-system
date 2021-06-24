@@ -28,8 +28,8 @@ public class EmployeeDetailedAnnualReport implements IReport {
 		System.out.println();
 		System.out.printf("\n\n\nWyświetlenie miesięcznego raportu godzin przepracowanych przez " + this.name
 				+ " w roku: " + this.year + "\n");
-		System.out.println("________________________________________________________________________________________");
-		System.out.printf("|%-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "ilość godzin");
+		System.out.println("______________________________________________________________________________________");
+		System.out.printf("| %-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "ilość godzin");
 
 		ArrayList<String> fullHashes = findData();
 
@@ -38,9 +38,9 @@ public class EmployeeDetailedAnnualReport implements IReport {
 			String[] toPrint = s.split(HASH_SPLITTER);
 
 			System.out
-					.println("---------------------------------------------------------------------------------------");
-			System.out.printf("|%-20s| %-40s | %-15s|\n",
-					MonthsConversionTable.MONTHS_NAME[Integer.parseInt(toPrint[0])], toPrint[1], toPrint[2]);
+					.println("--------------------------------------------------------------------------------------");
+			System.out.printf("| %-20s| %-40s | %-15s|\n",
+					MonthsConversionTable.MONTHS_NAME[Integer.parseInt(toPrint[0]) - 10], toPrint[1], toPrint[2]);
 
 		}
 
@@ -57,17 +57,17 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 			int resultYear = calendar.get(Calendar.YEAR);
 
-			String key = hasher(p);
+			String hash = hasher(p);
 
 			if (p.getEmployeeName().equals(this.name) && resultYear == this.year) {
 
-				if (!foundProjectTasks.containsKey(key)) {
+				if (!foundProjectTasks.containsKey(hash)) {
 
-					foundProjectTasks.put(key, p.getHours());
+					foundProjectTasks.put(hash, p.getHours());
 
 				} else {
 
-					foundProjectTasks.put(key, foundProjectTasks.get(key) + p.getHours());
+					foundProjectTasks.put(hash, foundProjectTasks.get(hash) + p.getHours());
 
 				}
 
@@ -75,6 +75,9 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 		}
 		ArrayList<String> sortedProjectTasksList = hashMapToArrayListSorted(foundProjectTasks);
+		
+		
+		
 		return sortedProjectTasksList;
 	}
 
@@ -84,9 +87,9 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 		calendar.setTime(projectTask.getDate());
 
-		String key = calendar.get(Calendar.MONTH) + HASH_SPLITTER + projectTask.getProjectName();
+		String hash = calendar.get(Calendar.MONTH) + 10 + HASH_SPLITTER + projectTask.getProjectName();
 
-		return key;
+		return hash;
 	}
 
 	private static String fullHasher(String hash, String hour) {
@@ -94,12 +97,12 @@ public class EmployeeDetailedAnnualReport implements IReport {
 		return fullHash;
 	}
 
-	private static ArrayList<String> hashMapToArrayListSorted(HashMap<String, Float> map) {
+	private static ArrayList<String> hashMapToArrayListSorted(HashMap<String, Float> foundProjectTasks) {
 		ArrayList<String> arrayListFullHashes = new ArrayList<String>();
 
-		for (String k : map.keySet()) {
+		for (String k : foundProjectTasks.keySet()) {
 
-			arrayListFullHashes.add(fullHasher(k, Float.toString(map.get(k))));
+			arrayListFullHashes.add(fullHasher(k, Float.toString(foundProjectTasks.get(k))));
 		}
 
 		Collections.sort(arrayListFullHashes);

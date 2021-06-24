@@ -32,6 +32,12 @@ public final class PDFExporter {
 			doc.addPage(page);
 			page.setRotation(90);
 
+			int yStartPosition = -40;
+			int yFirstLineOffset = -25;
+			int yNewLineOffset = -16;
+			
+			int yCarriagePosition = yStartPosition + yFirstLineOffset;
+			
 			PDType0Font font = PDType0Font.load(doc, new File("../report-management-system/resources/cour.ttf"));
 
 			try (PDPageContentStream contents = new PDPageContentStream(doc, page)) {
@@ -40,11 +46,11 @@ public final class PDFExporter {
 
 				contents.beginText();
 				contents.setFont(font, 10);
-				contents.newLineAtOffset(40, -40);
+				contents.newLineAtOffset(40, yStartPosition);
 				
 				contents.showText("© Super raport do generowania statystyk w Twojej firmie!");
 				
-				contents.newLineAtOffset(0, -25);
+				contents.newLineAtOffset(0, yFirstLineOffset);
 				
 				for (String s : lines) {
 
@@ -59,6 +65,8 @@ public final class PDFExporter {
 			}
 
 			doc.save(filename);
+			
+			System.out.println("PDF created");
 		}
 	}
 
