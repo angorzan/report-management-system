@@ -35,7 +35,7 @@ public class Menu {
 				scanLocation(newPath);
 			}
 
-			if (file.getName().endsWith(".xls")) {
+			if (file.getName().endsWith(".xls") || file.getName().endsWith(".xlsx")) {
 				WorkbookScanner.scanWorkbook(Paths.get(file.getAbsolutePath()));
 			}
 		}
@@ -96,7 +96,7 @@ public class Menu {
 
 		System.out.print("Czy chcesz wygenerowac plikl PDF z raportem? n - NIE, y - TAK: ");
 		String choiceYN = scanner.nextLine();
-		
+
 		if (choiceYN.equals("y") || choiceYN.equals("Y")) {
 			PDFExporter.generatePDF(report);
 		} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
@@ -120,22 +120,21 @@ public class Menu {
 			ProjectSummaryHoursReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
 			projectPSHR.printReport();
 
-			
 			System.out.print("Czy chcesz wygenerowac wykres slupkowy z raportu? n - NIE, y - TAK: ");
 			String choiceYN = scanner.nextLine();
-			
+
 			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
-					BarChart.saveChart("./src/main/reportBar", projectPSHR);
-				} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
-					System.out.println("Nie wygenerowales wykresu.");
-				} else {
-					System.out.println("Nie podales wybranej opcji.");
-				}
-			
+				BarChart.saveChart("./src/main/reportBar", projectPSHR);
+			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
+				System.out.println("Nie wygenerowales wykresu.");
+			} else {
+				System.out.println("Nie podales wybranej opcji.");
+			}
+
 			generatePdf(projectPSHR);
-			
+
 			break;
-			
+
 		case 3:
 			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
 			String empName = scanner.nextLine();
@@ -145,7 +144,7 @@ public class Menu {
 
 			IReport reportEDAR = new EmployeeDetailedAnnualReport(empName, year);
 			reportEDAR.printReport();
-			
+
 			generatePdf(reportEDAR);
 			break;
 		case 4:
@@ -158,24 +157,22 @@ public class Menu {
 
 			EmployeeProjectEngagementReport reportEPER = new EmployeeProjectEngagementReport(empName1, year1);
 			reportEPER.printReport();
-			
+
 			System.out.print("Czy chcesz wygenerowac wykres kolowy z raportu? n - NIE, y - TAK: ");
 			String choiceYN1 = scanner.nextLine();
-			
+
 			if (choiceYN1.equals("y") || choiceYN1.equals("Y")) {
-//				System.out.print("Podaj sciezke do ktorej chcesz zapisac wykres...:");
-//				String userPath;
-				
-					PiecakeChart.saveChart("./src/main/reportPie", reportEPER);
-				} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
-					System.out.println("Nie wygenerowales wykresu.");
-				} else {
-					System.out.println("Nie podales wybranej opcji.");
-				}
-			
+
+				PiecakeChart.saveChart("./src/main/reportPie", reportEPER);
+			} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
+				System.out.println("Nie wygenerowales wykresu.");
+			} else {
+				System.out.println("Nie podales wybranej opcji.");
+			}
+
 			generatePdf(reportEPER);
 			break;
-			
+
 		case 5:
 
 			System.out.println("Podaj nazwę projektu dla którego chcesz wygenerować raport:");
@@ -197,14 +194,14 @@ public class Menu {
 		case 0:
 			System.out.println("Koniec pracy programu. Dziękuję!");
 			System.exit(0);
-			
+
 		default:
 			System.out.println("Raport o podanym numerze nie istnieje. Spróbuj ponownie.");
 			printMainMenu();
 		}
 		whatDoYouWantToDoNext();
 	}
-	
+
 	public static ArrayList<ProjectTask> getProjectTasks() {
 		return projectTasks;
 	}

@@ -18,6 +18,8 @@ import reports.IReport;
 
 public final class PDFExporter {
 
+	private static final String SPLITTER = "##";
+
 	private static Scanner scanner = new Scanner(System.in);
 
 	private static String teamName = "©DreamTeam";
@@ -40,9 +42,7 @@ public final class PDFExporter {
 		if (filename.equals(".pdf")) {
 			filename = defaultFilename;
 		}
-		
-		scanner.close();
-		
+
 		PDPage page = new PDPage();
 		PDDocument doc = new PDDocument();
 
@@ -50,7 +50,7 @@ public final class PDFExporter {
 
 		int pageHeight = (int) page.getMediaBox().getWidth();
 
-		int fontSize = 12;
+		int fontSize = 10;
 
 		int xMargin = 40;
 
@@ -151,34 +151,12 @@ public final class PDFExporter {
 
 		String rc = "\r";
 
-		String[] tempStash = { "temp", input };
+		String inputFilteredNL = input.replaceAll(nl, SPLITTER);
+		String inputFullyFiltered = inputFilteredNL.replaceAll(rc, SPLITTER);
 
-		int positionN;
-
-		int positionR;
-
-		String splitter;
-
-		while (tempStash.length > 1) {
-
-			while (tempStash[1].indexOf(nl) == 0 || tempStash[1].indexOf(rc) == 0) {
-				tempStash[1] = tempStash[1].substring(1, tempStash[1].length());
-			}
-
-			positionN = tempStash[1].indexOf(nl);
-
-			positionR = tempStash[1].indexOf(rc);
-
-			splitter = positionN < positionR ? nl : rc;
-
-			tempStash = tempStash[1].split(splitter, 2);
-
-			while (tempStash[0].endsWith(nl) || tempStash[0].endsWith(rc)) {
-				tempStash[0] = tempStash[0].substring(0, tempStash[0].length() - 1);
-			}
-
-			lines.add(tempStash[0]);
-
+		String[] inputArray = inputFullyFiltered.split(SPLITTER);
+		for (String s : inputArray) {
+			lines.add(s);
 		}
 
 		return lines;

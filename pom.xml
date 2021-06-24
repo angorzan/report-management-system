@@ -5,9 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>reportManagement</groupId>
-	<artifactId>reportManagement</artifactId>
+	<artifactId>core-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<packaging>jar</packaging>
+	
 	<name>reportManagement</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
@@ -106,35 +107,35 @@
 					<target>8</target>
 				</configuration>
 			</plugin>
-			
-			
-			
+
+
+
 			<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-assembly-plugin</artifactId>
-    <executions>
-        <execution>
-            <phase>package</phase>
-            <goals>
-                <goal>single</goal>
-            </goals>
-            <configuration>
-                <archive>
-                <manifest>
-                    <mainClass>
-                        report-management-system.src.main.java.reportManagement.App
-                    </mainClass>
-                </manifest>
-                </archive>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-			
-			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>
+										report-management-system.src.main.java.reportManagement.App
+									</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
 </project>
