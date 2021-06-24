@@ -31,4 +31,14 @@ public class ProjectTask {
 		this.date = date;
 		this.hours = hours;
 	}
+
+	@Override
+	public String toString() {
+		return "ProjectTask{" +
+				"sheetName='" + sheetName + '\'' +
+				", employeeName='" + employeeName + '\'' +
+				", date=" + date +
+				", hours=" + hours +
+				'}';
+	}
 }

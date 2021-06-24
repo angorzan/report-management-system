@@ -15,7 +15,7 @@ public class Menu {
 	private Scanner scanner;
 
 	public Menu(String path) {
-//		projectTasks = new ArrayList<ProjectTask>();
+
 		this.scanLocation(path);
 		scanner = new Scanner(System.in);
 	}
