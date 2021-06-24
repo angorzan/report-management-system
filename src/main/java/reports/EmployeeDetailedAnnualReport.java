@@ -31,7 +31,7 @@ public class EmployeeDetailedAnnualReport implements IReport {
 		System.out.println("______________________________________________________________________________________");
 		System.out.printf("| %-20s| %-40s | %-15s|\n", "Miesiąc", "Nazwa projektu", "Ilość godzin");
 
-		ArrayList<String> fullHashes = findData();
+		ArrayList<String> fullHashes = getData();
 
 		for (String s : fullHashes) {
 
@@ -46,7 +46,7 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 	}
 
-	private ArrayList<String> findData() {
+	private ArrayList<String> getData() {
 
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();

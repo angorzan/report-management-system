@@ -29,7 +29,7 @@ public class EmployeeProjectEngagementReport implements IReport {
 				"______________________________________________________________________________________________________________");
 		System.out.printf("| %-40s| %-40s | %-20s|\n", "Imię i nazwisko", "Nazwa projektu", "Zaangażowanie %");
 
-		ArrayList<String> projectEngagement = findData();
+		ArrayList<String> projectEngagement = getData();
 
 		for (String s : projectEngagement) {
 			float totalHours = 0;
@@ -52,7 +52,7 @@ public class EmployeeProjectEngagementReport implements IReport {
 		}
 	}
 
-	private ArrayList<String> findData() {
+	private ArrayList<String> getData() {
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 
 		Calendar calendar = Calendar.getInstance();
