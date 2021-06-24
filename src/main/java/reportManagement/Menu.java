@@ -48,7 +48,7 @@ public class Menu {
 		System.out.println("3. Generuj miesięczny raport godzin przepracowanych przez wybranego pracownika");
 		System.out.println("4. Generuj procentowy udział w projektach dla danego pracownika");
 		System.out.println("5. Generuj sumaryczny raport godzin projektowych ");
-		System.out.println("6. Generuj całościowy raport");
+		System.out.println("6. Generuj procentowy udział w projektach dla wszystkich pracowników");
 		System.out.println("0. Zakończ prace z programem \n");
 		System.out.println("Podaj numer raportu:");
 
@@ -117,11 +117,16 @@ public class Menu {
 			reportEDAR.printReport();
 			break;
 		case 4:
+			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
+			String empName1 = scanner.nextLine();
+
 			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
-			
-			IReport reportEPER = new EmployeeProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
+
+			int year1 = Integer.parseInt(scanner.nextLine());
+
+			IReport reportEPER = new EmployeeProjectEngagementReport(empName1, year1);
 			reportEPER.printReport();
-			
+
 			break;
 		case 5:
 
@@ -130,6 +135,16 @@ public class Menu {
 			ProjectEmployeeConsumptionReport projectPECR = new ProjectEmployeeConsumptionReport(scanner.nextLine());
 			projectPECR.printReport();
 			break;
+
+		case 6:
+
+			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
+
+			IReport reportPER = new ProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
+			reportPER.printReport();
+
+			break;
+
 		case 0:
 			System.out.println("Koniec pracy programu. Dziękuję!");
 			System.exit(0);

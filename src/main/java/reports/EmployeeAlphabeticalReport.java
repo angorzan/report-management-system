@@ -19,7 +19,11 @@ public class EmployeeAlphabeticalReport implements IReport {
         this.year = year;
     }
 
-    public void printReport() {
+    public String getReportName() {
+    	return "EmployeeAlphabeticalReport" + "_" + year;
+    }
+    
+	public void printReport() {
 
 
         Map<String, Float> result = getData();

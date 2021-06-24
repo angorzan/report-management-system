@@ -23,6 +23,10 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 	}
 
+    public String getReportName() {
+    	return "EmployeeDetailedAnnualReport" + "_" + this.year + "_" + this.name;
+    }
+	
 	public void printReport() {
 
 		System.out.println();

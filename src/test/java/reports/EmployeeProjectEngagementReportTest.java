@@ -18,7 +18,7 @@ public class EmployeeProjectEngagementReportTest extends TestCase {
     @Test
     public void noProjekt3ForAleksandraSobolewska() {
 
-        EmployeeProjectEngagementReport test = new EmployeeProjectEngagementReport(2012);
+        ProjectEngagementReport test = new ProjectEngagementReport(2012);
         tasksList = test.getData();
         boolean result = true;
         for (String s: tasksList) {
@@ -32,7 +32,7 @@ public class EmployeeProjectEngagementReportTest extends TestCase {
     }
     @Test
     public void noProjectForAndrzejCiombor() {
-        EmployeeProjectEngagementReport test = new EmployeeProjectEngagementReport(2012);
+        ProjectEngagementReport test = new ProjectEngagementReport(2012);
         tasksList = test.getData();
         boolean result = false;
         for (String s: tasksList) {
@@ -45,7 +45,7 @@ public class EmployeeProjectEngagementReportTest extends TestCase {
     }
     @Test
     public void testProjekt1IsCorrect() {
-        EmployeeProjectEngagementReport test = new EmployeeProjectEngagementReport(2012);
+        ProjectEngagementReport test = new ProjectEngagementReport(2012);
         tasksList = test.getData();
         String [] splitted = new String[10];
         for (String s: tasksList) {

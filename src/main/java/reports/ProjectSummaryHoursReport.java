@@ -18,6 +18,10 @@ public class ProjectSummaryHoursReport implements IReport {
 		this.year = year;
 	}
 
+    public String getReportName() {
+    	return "ProjectSummaryHoursReport" + "_" + this.year;
+    }
+	
 	public void printReport() {
 		Map<String, Float> result = getData();
 		System.out.printf("\n\nZestawienie godzin projektowych dla projektów w " + this.year + " roku \n");

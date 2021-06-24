@@ -15,6 +15,10 @@ public class ProjectEmployeeConsumptionReport implements IReport {
 		this.projectName = projectName;
 	}
 
+    public String getReportName() {
+    	return "ProjectEmployeeConsumptionReport" + "_" + this.projectName;
+    }
+	
 	public void printReport() {
 
 		Map<String, Float> result = getData();

@@ -11,6 +11,6 @@ public class App {
 
 		Menu menu = new Menu("../report-management-system/src/test/resources");
 		menu.printMainMenu();
-
+		
 	}
 }
