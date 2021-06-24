@@ -2,7 +2,12 @@ package reportManagement;
 
 import WorbookProcessor.WorkbookScanner;
 import reports.*;
+import utilities.BarChart;
+import utilities.PDFExporter;
+import utilities.PiecakeChart;
+
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -65,9 +70,6 @@ public class Menu {
 
 		System.out.println("\nWybierz co chcesz zrobić:");
 		System.out.println("0 - przejście do menu głównego");
-		System.out.println("1 - eksport danych do pliku PDF");
-//		System.out.println("2 - wybierz inny rok");
-//		System.out.println("3 - wybierz innego pracownika");
 		System.out.println("9 - zakończenie pracy programu");
 		System.out.print("Podaj swój wybór: ");
 
@@ -76,9 +78,6 @@ public class Menu {
 		try {
 			if (showMenu == 0) {
 				printMainMenu();
-			} else if (showMenu == 1) {
-				System.out.println("Generowanie pliku PDF...");
-//            	PDFExporter();
 			} else if (showMenu == 9) {
 				System.out.println("Koniec pracy programu. Dziękuję!");
 				System.exit(0);
@@ -93,19 +92,50 @@ public class Menu {
 
 	}
 
-	private void chooseOption(int choice) {
+	private void generatePdf(IReport report) throws IOException {
+
+		System.out.print("Czy chcesz wygenerowac plikl PDF z raportem? n - NIE, y - TAK: ");
+		String choiceYN = scanner.nextLine();
+		
+		if (choiceYN.equals("y") || choiceYN.equals("Y")) {
+			PDFExporter.generatePDF(report);
+		} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
+			System.out.println("Nie wygenerowales raportu.");
+		} else {
+			System.out.println("Nie podales poprawnej opcji.");
+		}
+	}
+
+	private void chooseOption(int choice) throws IOException {
 
 		switch (choice) {
 		case 1:
 			System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
 			IReport reportEAR = new EmployeeAlphabeticalReport(Integer.parseInt(scanner.nextLine()));
 			reportEAR.printReport();
+			generatePdf(reportEAR);
 			break;
 		case 2:
 			System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
-			IReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
+			ProjectSummaryHoursReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
 			projectPSHR.printReport();
+
+			
+			System.out.print("Czy chcesz wygenerowac wykres slupkowy z raportu? n - NIE, y - TAK: ");
+			String choiceYN = scanner.nextLine();
+			
+			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
+					BarChart.saveChart("./src/main/reportBar", projectPSHR);
+				} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
+					System.out.println("Nie wygenerowales wykresu.");
+				} else {
+					System.out.println("Nie podales wybranej opcji.");
+				}
+			
+			generatePdf(projectPSHR);
+			
 			break;
+			
 		case 3:
 			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
 			String empName = scanner.nextLine();
@@ -115,6 +145,8 @@ public class Menu {
 
 			IReport reportEDAR = new EmployeeDetailedAnnualReport(empName, year);
 			reportEDAR.printReport();
+			
+			generatePdf(reportEDAR);
 			break;
 		case 4:
 			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
@@ -124,16 +156,33 @@ public class Menu {
 
 			int year1 = Integer.parseInt(scanner.nextLine());
 
-			IReport reportEPER = new EmployeeProjectEngagementReport(empName1, year1);
+			EmployeeProjectEngagementReport reportEPER = new EmployeeProjectEngagementReport(empName1, year1);
 			reportEPER.printReport();
-
+			
+			System.out.print("Czy chcesz wygenerowac wykres kolowy z raportu? n - NIE, y - TAK: ");
+			String choiceYN1 = scanner.nextLine();
+			
+			if (choiceYN1.equals("y") || choiceYN1.equals("Y")) {
+//				System.out.print("Podaj sciezke do ktorej chcesz zapisac wykres...:");
+//				String userPath;
+				
+					PiecakeChart.saveChart("./src/main/reportPie", reportEPER);
+				} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
+					System.out.println("Nie wygenerowales wykresu.");
+				} else {
+					System.out.println("Nie podales wybranej opcji.");
+				}
+			
+			generatePdf(reportEPER);
 			break;
+			
 		case 5:
 
 			System.out.println("Podaj nazwę projektu dla którego chcesz wygenerować raport:");
 
 			ProjectEmployeeConsumptionReport projectPECR = new ProjectEmployeeConsumptionReport(scanner.nextLine());
 			projectPECR.printReport();
+			generatePdf(projectPECR);
 			break;
 
 		case 6:
@@ -142,19 +191,20 @@ public class Menu {
 
 			IReport reportPER = new ProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
 			reportPER.printReport();
-
+			generatePdf(reportPER);
 			break;
 
 		case 0:
 			System.out.println("Koniec pracy programu. Dziękuję!");
 			System.exit(0);
+			
 		default:
 			System.out.println("Raport o podanym numerze nie istnieje. Spróbuj ponownie.");
 			printMainMenu();
 		}
 		whatDoYouWantToDoNext();
 	}
-
+	
 	public static ArrayList<ProjectTask> getProjectTasks() {
 		return projectTasks;
 	}

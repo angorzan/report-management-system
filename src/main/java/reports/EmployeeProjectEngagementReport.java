@@ -56,7 +56,7 @@ public class EmployeeProjectEngagementReport implements IReport {
 		}
 	}
 
-	private ArrayList<String> getData() {
+	public ArrayList<String> getData() {
 
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();
