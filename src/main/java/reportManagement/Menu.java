@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -127,11 +126,15 @@ public class Menu {
 
 			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
 				
-				String defaultChartfileename = projectPSHR.getReportName();
+				String defaultChartfileename = projectPSHR.getReportName() + ".jpg";
 				System.out.println(
 						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
 								+ defaultChartfileename + ")");
-				String nameChart = scanner.nextLine();
+				String nameChart = scanner.nextLine() + ".jpg";
+				
+				if (nameChart.equals(".jpg")) {
+					nameChart = defaultChartfileename;
+				}
 				
 				BarChart.saveChart(App.path + "/" + nameChart, projectPSHR);
 			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
@@ -176,7 +179,11 @@ public class Menu {
 				System.out.println(
 						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
 								+ defaultChartfileename + ")");
-				String nameChart = scanner.nextLine();
+				String nameChart = scanner.nextLine() + ".jpg";
+				
+				if (nameChart.equals(".jpg")) {
+					nameChart = defaultChartfileename;
+				}
 				
 				PiecakeChart.saveChart(App.path + "/" + nameChart, reportEPER);
 			} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
