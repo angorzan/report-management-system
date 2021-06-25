@@ -24,6 +24,7 @@ public class EmployeeAlphabeticalReportTest extends TestCase {
         EmployeeAlphabeticalReport test = new EmployeeAlphabeticalReport(2012);
         tasksList = test.getData();
         Assert.assertNull(tasksList.get("Jan Kowalski"));
+
     }
 
     @Test
