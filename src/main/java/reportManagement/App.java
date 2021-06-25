@@ -38,6 +38,7 @@ public class App {
 			Menu menu = new Menu(path);
 			menu.printMainMenu();
 		} catch (NullPointerException e) {
+			System.out.println();
 			System.out.println("Podana ścieżka jest niepoprawna lub nie zawiera danych.");
 			System.out.println("________________________________________________________\n\n");
 			setPath();

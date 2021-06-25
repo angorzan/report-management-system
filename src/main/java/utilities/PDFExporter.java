@@ -46,8 +46,8 @@ public final class PDFExporter {
 		PDPage page = new PDPage();
 		PDDocument doc = new PDDocument();
 
-		PDType0Font font = PDType0Font.load(doc, new File("../report-management-system/resources/cour.ttf"));
-
+		PDType0Font font = PDType0Font.load(doc, new File("cour.ttf"));
+		
 		int pageHeight = (int) page.getMediaBox().getWidth();
 
 		int fontSize = 10;
