@@ -124,7 +124,7 @@ public class Menu {
 			String choiceYN = scanner.nextLine();
 
 			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
-				BarChart.saveChart("./src/main/reportBar", projectPSHR);
+				BarChart.saveChart(App.path, projectPSHR);
 			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
 				System.out.println("Nie wygenerowales wykresu.");
 			} else {
@@ -163,7 +163,7 @@ public class Menu {
 
 			if (choiceYN1.equals("y") || choiceYN1.equals("Y")) {
 
-				PiecakeChart.saveChart("./src/main/reportPie", reportEPER);
+				PiecakeChart.saveChart(App.path, reportEPER);
 			} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
 				System.out.println("Nie wygenerowales wykresu.");
 			} else {

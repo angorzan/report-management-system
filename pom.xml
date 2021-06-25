@@ -8,7 +8,7 @@
 	<artifactId>core-java</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
+
 	<name>reportManagement</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
@@ -67,6 +67,11 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>3.0.2</version>
 				</plugin>
+
+
+
+
+
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
@@ -123,7 +128,7 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										report-management-system.src.main.java.reportManagement.App
+										reportManagement.App
 									</mainClass>
 								</manifest>
 							</archive>
@@ -134,6 +139,13 @@
 					</execution>
 				</executions>
 			</plugin>
+
+
+
+
+
+
+
 
 
 		</plugins>
