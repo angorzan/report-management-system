@@ -24,8 +24,7 @@ public class PiecakeChart {
 	  public static PieChart getChart() throws IOException {
 		  
 		    // Create Chart
-		    PieChart chart = new PieChartBuilder().width(800).height(600).title("My Pie Chart").build();
-
+		  	PieChart chart = new PieChartBuilder().width(800).height(600).title("Procentowy udzial w projektach").theme(ChartTheme.GGPlot2).build();
 		    // Customize Chart
 		    chart.getStyler().setLegendVisible(false);
 		    chart.getStyler().setAnnotationType(AnnotationType.LabelAndPercentage);

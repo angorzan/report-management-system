@@ -114,7 +114,7 @@ public final class PDFExporter {
 
 			String pageNo = "Page " + pageNumber + " --- " + teamName;
 
-			contents.setFont(font, fontSize - 4);
+			contents.setFont(font, 8);
 			contents.showText(pageNo);
 			yCarriagePosition = yInitialCarriagePosition;
 			contents.endText();

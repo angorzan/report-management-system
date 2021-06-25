@@ -75,9 +75,8 @@ public class Menu {
 		System.out.println("9 - przejście do menu głównego");
 		System.out.print("Podaj swój wybór: ");
 
-		int showMenu = Integer.parseInt(scanner.nextLine());
-
 		try {
+			int showMenu = Integer.parseInt(scanner.nextLine());
 			if (showMenu == 0) {
 				System.out.println("Koniec pracy programu. Dziękuję!");
 				System.exit(0);
@@ -89,7 +88,7 @@ public class Menu {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Podana wartość nie jest liczbą");
+			System.out.println("podana wartość nie jest liczbą");
 			whatDoYouWantToDoNext();
 		}
 
