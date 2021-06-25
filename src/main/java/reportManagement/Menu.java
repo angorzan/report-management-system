@@ -62,39 +62,42 @@ public class Menu {
 			chooseOption(reportType);
 
 		} catch (Exception e) {
-
+			System.out.println("podana wartość nie jest liczbą");
+			whatDoYouWantToDoNext();
+		
 		}
 	}
 
 	private void whatDoYouWantToDoNext() {
 
 		System.out.println("\nWybierz co chcesz zrobić:");
-		System.out.println("0 - przejście do menu głównego");
-		System.out.println("9 - zakończenie pracy programu");
+		System.out.println("0 - zakończenie pracy programu");
+		System.out.println("9 - przejście do menu głównego");
 		System.out.print("Podaj swój wybór: ");
 
 		int showMenu = Integer.parseInt(scanner.nextLine());
 
 		try {
 			if (showMenu == 0) {
-				printMainMenu();
-			} else if (showMenu == 9) {
 				System.out.println("Koniec pracy programu. Dziękuję!");
 				System.exit(0);
+			} else if (showMenu == 9) {
+				printMainMenu();			
 			} else {
 				System.out.println("Podałeś niepoprawny numer, wpisz jeszcze raz.");
 				whatDoYouWantToDoNext();
 			}
 
-		} catch (InputMismatchException e) {
-			System.out.println("Nie wpisales liczby takiej jak wymagana!");
+		} catch (Exception e) {
+			System.out.println("Podana wartość nie jest liczbą");
+			whatDoYouWantToDoNext();
 		}
 
 	}
 
 	private void generatePdf(IReport report) throws IOException {
 
-		System.out.print("Czy chcesz wygenerowac plikl PDF z raportem? n - NIE, y - TAK: ");
+		System.out.print("Czy chcesz wygenerowac plik PDF z raportem? n - NIE, y - TAK: ");
 		String choiceYN = scanner.nextLine();
 
 		if (choiceYN.equals("y") || choiceYN.equals("Y")) {
@@ -124,7 +127,14 @@ public class Menu {
 			String choiceYN = scanner.nextLine();
 
 			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
-				BarChart.saveChart(App.path, projectPSHR);
+				
+				String defaultChartfileename = projectPSHR.getReportName();
+				System.out.println(
+						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
+								+ defaultChartfileename + ")");
+				String nameChart = scanner.nextLine();
+				
+				BarChart.saveChart(App.path + "/" + nameChart, projectPSHR);
 			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
 				System.out.println("Nie wygenerowales wykresu.");
 			} else {
@@ -162,8 +172,14 @@ public class Menu {
 			String choiceYN1 = scanner.nextLine();
 
 			if (choiceYN1.equals("y") || choiceYN1.equals("Y")) {
-
-				PiecakeChart.saveChart(App.path, reportEPER);
+				
+				String defaultChartfileename = reportEPER.getReportName();
+				System.out.println(
+						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
+								+ defaultChartfileename + ")");
+				String nameChart = scanner.nextLine();
+				
+				PiecakeChart.saveChart(App.path + "/" + nameChart, reportEPER);
 			} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
 				System.out.println("Nie wygenerowales wykresu.");
 			} else {
@@ -172,7 +188,6 @@ public class Menu {
 
 			generatePdf(reportEPER);
 			break;
-
 		case 5:
 
 			System.out.println("Podaj nazwę projektu dla którego chcesz wygenerować raport:");
