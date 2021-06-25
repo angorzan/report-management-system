@@ -63,7 +63,7 @@ public class Menu {
 		} catch (Exception e) {
 			System.out.println("podana wartość nie jest liczbą");
 			whatDoYouWantToDoNext();
-		
+
 		}
 	}
 
@@ -80,7 +80,7 @@ public class Menu {
 				System.out.println("Koniec pracy programu. Dziękuję!");
 				System.exit(0);
 			} else if (showMenu == 9) {
-				printMainMenu();			
+				printMainMenu();
 			} else {
 				System.out.println("Podałeś niepoprawny numer, wpisz jeszcze raz.");
 				whatDoYouWantToDoNext();
@@ -111,58 +111,58 @@ public class Menu {
 
 		switch (choice) {
 		case 1:
-			System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
-			IReport reportEAR = new EmployeeAlphabeticalReport(Integer.parseInt(scanner.nextLine()));
-			reportEAR.printReport();
-			generatePdf(reportEAR);
+			firstReport();
 			break;
 		case 2:
-			System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
-			ProjectSummaryHoursReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
-			projectPSHR.printReport();
-
-			System.out.print("Czy chcesz wygenerowac wykres slupkowy z raportu? n - NIE, y - TAK: ");
-			String choiceYN = scanner.nextLine();
-
-			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
-				
-				String defaultChartfileename = projectPSHR.getReportName() + ".jpg";
-				System.out.println(
-						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
-								+ defaultChartfileename + ")");
-				String nameChart = scanner.nextLine() + ".jpg";
-				
-				if (nameChart.equals(".jpg")) {
-					nameChart = defaultChartfileename;
-				}
-				
-				BarChart.saveChart(App.path + "/" + nameChart, projectPSHR);
-			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
-				System.out.println("Nie wygenerowales wykresu.");
-			} else {
-				System.out.println("Nie podales wybranej opcji.");
-			}
-
-			generatePdf(projectPSHR);
-
+			secondReport();
 			break;
-
 		case 3:
-			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
-			String empName = scanner.nextLine();
-
-			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
-			int year = Integer.parseInt(scanner.nextLine());
-
-			IReport reportEDAR = new EmployeeDetailedAnnualReport(empName, year);
-			reportEDAR.printReport();
-
-			generatePdf(reportEDAR);
+			thirdReport();
 			break;
 		case 4:
-			System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
-			String empName1 = scanner.nextLine();
+			fourthReport();
+			break;
+		case 5:
+			fifthReport();
+			break;
+		case 6:
+			sixthReport();
+			break;
+		case 0:
+			System.out.println("Koniec pracy programu. Dziękuję!");
+			System.exit(0);
+		default:
+			System.out.println("Raport o podanym numerze nie istnieje. Spróbuj ponownie.");
+			printMainMenu();
+		}
+		whatDoYouWantToDoNext();
+	}
 
+	private void sixthReport() throws IOException {
+		try {
+			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
+			IReport reportPER = new ProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
+			reportPER.printReport();
+			generatePdf(reportPER);
+		} catch (Exception e) {
+			System.out.println("podana wartość nie jest liczbą");
+			sixthReport();
+		}
+	}
+
+	private void fifthReport() throws IOException {
+		System.out.println("Podaj nazwę projektu dla którego chcesz wygenerować raport:");
+
+		ProjectEmployeeConsumptionReport projectPECR = new ProjectEmployeeConsumptionReport(scanner.nextLine());
+		projectPECR.printReport();
+		generatePdf(projectPECR);
+	}
+
+	private void fourthReport() throws IOException {
+		System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
+		String empName1 = scanner.nextLine();
+
+		try {
 			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
 
 			int year1 = Integer.parseInt(scanner.nextLine());
@@ -174,17 +174,17 @@ public class Menu {
 			String choiceYN1 = scanner.nextLine();
 
 			if (choiceYN1.equals("y") || choiceYN1.equals("Y")) {
-				
+
 				String defaultChartfileename = reportEPER.getReportName();
 				System.out.println(
 						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
 								+ defaultChartfileename + ")");
 				String nameChart = scanner.nextLine() + ".jpg";
-				
+
 				if (nameChart.equals(".jpg")) {
 					nameChart = defaultChartfileename;
 				}
-				
+
 				PiecakeChart.saveChart(App.path + "/" + nameChart, reportEPER);
 			} else if (choiceYN1.equals("n") || choiceYN1.equals("N")) {
 				System.out.println("Nie wygenerowales wykresu.");
@@ -193,34 +193,75 @@ public class Menu {
 			}
 
 			generatePdf(reportEPER);
-			break;
-		case 5:
-
-			System.out.println("Podaj nazwę projektu dla którego chcesz wygenerować raport:");
-
-			ProjectEmployeeConsumptionReport projectPECR = new ProjectEmployeeConsumptionReport(scanner.nextLine());
-			projectPECR.printReport();
-			generatePdf(projectPECR);
-			break;
-
-		case 6:
-
-			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
-
-			IReport reportPER = new ProjectEngagementReport(Integer.parseInt(scanner.nextLine()));
-			reportPER.printReport();
-			generatePdf(reportPER);
-			break;
-
-		case 0:
-			System.out.println("Koniec pracy programu. Dziękuję!");
-			System.exit(0);
-
-		default:
-			System.out.println("Raport o podanym numerze nie istnieje. Spróbuj ponownie.");
-			printMainMenu();
+		} catch (Exception e) {
+			System.out.println("podana wartość nie jest liczbą");
+			fourthReport();
 		}
-		whatDoYouWantToDoNext();
+	}
+
+	private void thirdReport() throws IOException {
+		System.out.println("Podaj imię i nazwisko pracownika w formacie: Imie Nazwisko");
+		String empName = scanner.nextLine();
+
+		try {
+			System.out.println("Podaj rok dla którego chcesz wygenerować raport");
+			int year = Integer.parseInt(scanner.nextLine());
+
+			IReport reportEDAR = new EmployeeDetailedAnnualReport(empName, year);
+			reportEDAR.printReport();
+
+			generatePdf(reportEDAR);
+		} catch (Exception e) {
+			System.out.println("podana wartość nie jest liczbą");
+			thirdReport();
+		}
+	}
+
+	private void secondReport() throws IOException {
+		System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
+		try {
+			ProjectSummaryHoursReport projectPSHR = new ProjectSummaryHoursReport(Integer.parseInt(scanner.nextLine()));
+			projectPSHR.printReport();
+
+			System.out.print("Czy chcesz wygenerowac wykres slupkowy z raportu? n - NIE, y - TAK: ");
+			String choiceYN = scanner.nextLine();
+
+			if (choiceYN.equals("y") || choiceYN.equals("Y")) {
+
+				String defaultChartfileename = projectPSHR.getReportName() + ".jpg";
+				System.out.println(
+						"Podaj nazwę pliku z wykresem lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
+								+ defaultChartfileename + ")");
+				String nameChart = scanner.nextLine() + ".jpg";
+
+				if (nameChart.equals(".jpg")) {
+					nameChart = defaultChartfileename;
+				}
+
+				BarChart.saveChart(App.path + "/" + nameChart, projectPSHR);
+			} else if (choiceYN.equals("n") || choiceYN.equals("N")) {
+				System.out.println("Nie wygenerowales wykresu.");
+			} else {
+				System.out.println("Nie podales wybranej opcji.");
+			}
+
+			generatePdf(projectPSHR);
+		} catch (Exception e) {
+			System.out.println("podana wartość nie jest liczbą");
+			secondReport();
+		}
+	}
+
+	private void firstReport() {
+		System.out.print("Podaj rok dla którego chcesz wygenerować raport: ");
+		try {
+			IReport reportEAR = new EmployeeAlphabeticalReport(Integer.parseInt(scanner.nextLine()));
+			reportEAR.printReport();
+			generatePdf(reportEAR);
+		} catch (Exception e) {
+			System.out.println("podana wartość nie jest liczbą");
+			firstReport();
+		}
 	}
 
 	public static ArrayList<ProjectTask> getProjectTasks() {
