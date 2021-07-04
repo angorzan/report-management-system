@@ -1,4 +1,5 @@
 package reports;
+
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,29 +8,25 @@ import java.util.Map;
 
 public class ProjectSummaryHoursReportTest extends TestCase {
 
-    private static Map<String, Float> tasksList;
+	Menu menu = new Menu("../report-management-system/src/test/resources");
+	ProjectSummaryHoursReport test = new ProjectSummaryHoursReport(menu.getProjectTasks(), 2012);
+	private Map<String, Float> tasksList = test.getData();
 
-    public void setUp() throws Exception {
+	@Test
+	public void testProjekt32012IsNull() {
 
-        super.setUp();
-        Menu menu = new Menu("../report-management-system/src/test/resources");
-    }
+		Assert.assertNull(tasksList.get("Projekt3"));
+	}
 
-    @Test
-    public void testProjekt32012IsNull() {
+	@Test
+	public void testProjekt12012IsCorrect() {
 
-        ProjectSummaryHoursReport test = new ProjectSummaryHoursReport(2012);
-        tasksList = test.getData();
-        Assert.assertNull(tasksList.get("Projekt3"));
-    }
-    @Test
-    public void testProjekt12012IsCorrect() {
+		Assert.assertEquals(tasksList.get("Projekt1"), 1176, 0.02);
+	}
 
-        Assert.assertEquals(tasksList.get("Projekt1"), 1176, 0.02);
-    }
-    @Test
-    public void testProjekt22012IsCorrect() {
+	@Test
+	public void testProjekt22012IsCorrect() {
 
-        Assert.assertEquals(tasksList.get("Projekt2"), 1371, 0.02);
-    }
+		Assert.assertEquals(tasksList.get("Projekt2"), 1371, 0.02);
+	}
 }

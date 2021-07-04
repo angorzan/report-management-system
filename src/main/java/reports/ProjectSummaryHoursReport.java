@@ -1,6 +1,5 @@
 package reports;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,10 +11,11 @@ public class ProjectSummaryHoursReport implements IReport {
 
 	private int year;
 
-	private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+	private ArrayList<ProjectTask> projectTasks;
 
-	public ProjectSummaryHoursReport(int year) {
+	public ProjectSummaryHoursReport(ArrayList<ProjectTask> projectTasks, int year) {
 		this.year = year;
+		this.projectTasks = projectTasks;
 	}
 
     public String getReportName() {

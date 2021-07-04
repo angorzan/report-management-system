@@ -1,6 +1,5 @@
 package reports;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 
 import java.util.*;
@@ -9,10 +8,11 @@ public class ProjectEmployeeConsumptionReport implements IReport {
 
 	private String projectName;
 
-	private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+	private ArrayList<ProjectTask> projectTasks;
 
-	public ProjectEmployeeConsumptionReport(String projectName) {
+	public ProjectEmployeeConsumptionReport(ArrayList<ProjectTask> projectTasks, String projectName) {
 		this.projectName = projectName;
+		this.projectTasks = projectTasks;
 	}
 
     public String getReportName() {

@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 import utilities.MonthsConversionTable;
 
@@ -13,14 +12,16 @@ public class EmployeeDetailedAnnualReport implements IReport {
 
 	private static final String HASH_SPLITTER = "#";
 
+    private ArrayList<ProjectTask> projectTasks;
+	
 	private String name;
 
 	private int year;
 
-	public EmployeeDetailedAnnualReport(String empName, int year) {
+	public EmployeeDetailedAnnualReport(ArrayList<ProjectTask> projectTasks, String empName, int year) {
 		this.name = empName;
 		this.year = year;
-
+		this.projectTasks = projectTasks;
 	}
 
     public String getReportName() {
@@ -55,7 +56,7 @@ public class EmployeeDetailedAnnualReport implements IReport {
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();
 
-		for (ProjectTask p : Menu.getProjectTasks()) {
+		for (ProjectTask p : projectTasks) {
 
 			calendar.setTime(p.getDate());
 

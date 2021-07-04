@@ -6,19 +6,21 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 
 public class ProjectEngagementReport implements IReport {
 
+	ArrayList<ProjectTask> projectTasks;
+	
 	private static final String HASH_SPLITTER = "#";
 
 	private int year;
 
 	private static DecimalFormat df = new DecimalFormat("0.00");
 
-	public ProjectEngagementReport(int year) {
+	public ProjectEngagementReport(ArrayList<ProjectTask> projectTasks, int year) {
 		this.year = year;
+		this.projectTasks = projectTasks;
 	}
 
     public String getReportName() {
@@ -61,7 +63,7 @@ public class ProjectEngagementReport implements IReport {
 
 		Calendar calendar = Calendar.getInstance();
 
-		for (ProjectTask p : Menu.getProjectTasks()) {
+		for (ProjectTask p : projectTasks) {
 			calendar.setTime(p.getDate());
 			int resultYear = calendar.get(Calendar.YEAR);
 

@@ -14,6 +14,7 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
 import org.apache.pdfbox.util.Matrix;
 
+import reportManagement.App;
 import reports.IReport;
 
 public final class PDFExporter {
@@ -37,6 +38,7 @@ public final class PDFExporter {
 		System.out.println(
 				"Podaj nazwę pliku lub pozostaw puste aby użyć domyślnej nazwy i naciśnij enter (domyślna nazwa: "
 						+ defaultFilename + ")");
+
 		String filename = scanner.nextLine() + ".pdf";
 
 		if (filename.equals(".pdf")) {
@@ -47,8 +49,7 @@ public final class PDFExporter {
 		PDDocument doc = new PDDocument();
 
 		PDType0Font font = PDType0Font.load(doc, new File("resources/cour.ttf"));
-		
-		
+
 		int pageHeight = (int) page.getMediaBox().getWidth();
 
 		int fontSize = 10;
@@ -125,8 +126,10 @@ public final class PDFExporter {
 
 		}
 
-		doc.save(filename);
+		doc.save(App.path + "/" + filename);
+
 		doc.close();
+
 		System.out.println("PDF created");
 	}
 

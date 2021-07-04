@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 
 public class EmployeeProjectEngagementReport implements IReport {
@@ -15,11 +14,14 @@ public class EmployeeProjectEngagementReport implements IReport {
 	private String name;
 	private int year;
 
+    private ArrayList<ProjectTask> projectTasks;
+	
 	private static DecimalFormat df = new DecimalFormat("0.00");
 
-	public EmployeeProjectEngagementReport(String name, int year) {
+	public EmployeeProjectEngagementReport(ArrayList<ProjectTask> projectTasks, String name, int year) {
 		this.name = name;
 		this.year = year;
+		this.projectTasks = projectTasks;
 	}
 
 	public String getReportName() {
@@ -61,7 +63,7 @@ public class EmployeeProjectEngagementReport implements IReport {
 		HashMap<String, Float> foundProjectTasks = new HashMap<String, Float>();
 		Calendar calendar = Calendar.getInstance();
 
-		for (ProjectTask p : Menu.getProjectTasks()) {
+		for (ProjectTask p : projectTasks) {
 
 			calendar.setTime(p.getDate());
 

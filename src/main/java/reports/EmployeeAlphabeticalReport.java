@@ -1,6 +1,5 @@
 package reports;
 
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
 
 import java.util.ArrayList;
@@ -13,10 +12,11 @@ public class EmployeeAlphabeticalReport implements IReport {
 
     private int year;
 
-    private ArrayList<ProjectTask> projectTasks = Menu.getProjectTasks();
+    private ArrayList<ProjectTask> projectTasks;
 
-    public EmployeeAlphabeticalReport(int year) {
+    public EmployeeAlphabeticalReport(ArrayList<ProjectTask> projectTasks, int year) {
         this.year = year;
+        this.projectTasks = projectTasks;
     }
 
     public String getReportName() {

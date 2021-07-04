@@ -27,6 +27,7 @@ public class App {
 
 		if (path.equals("Exit") || path.equals("exit")) {
 			System.out.println("Koniec pracy programu. Dziękuję!");
+			scanner.close();
 			System.exit(0);
 		}
 
@@ -36,7 +37,83 @@ public class App {
 
 		try {
 			Menu menu = new Menu(path);
+
+			int counter = 0;
+
+			System.out.println("\nZnalezieni pracownicy:\n");
+
+			for (String s : menu.getEmployees()) {
+
+				if (counter != 0) {
+					System.out.print("   |   ");
+				}
+
+				System.out.print(s);
+
+				counter++;
+
+				if (counter > 4) {
+					System.out.println();
+					counter = 0;
+
+				}
+
+			}
+
+			System.out.print(
+					"\n\n----------------------------------------------------------------------------------------------------\n\n");
+
+			counter = 0;
+
+			System.out.println("Znalezione projekty:\n");
+
+			for (String s : menu.getProjects()) {
+
+				if (counter != 0) {
+					System.out.print("   |   ");
+				}
+
+				System.out.print(s);
+
+				counter++;
+
+				if (counter > 4) {
+					System.out.println();
+					counter = 0;
+
+				}
+
+			}
+
+			System.out.print(
+					"\n\n----------------------------------------------------------------------------------------------------\n\n");
+
+			counter = 0;
+
+			System.out.println("Znalezione lata:\n");
+
+			for (int i : menu.getYears()) {
+
+				if (counter != 0) {
+					System.out.print("   |   ");
+				}
+
+				System.out.print(i);
+
+				counter++;
+
+				if (counter > 4) {
+					System.out.println();
+					counter = 0;
+
+				}
+
+			}
+
+			System.out.print("\n\n\n");
+
 			menu.printMainMenu();
+
 		} catch (NullPointerException e) {
 			System.out.println();
 			System.out.println("Podana ścieżka jest niepoprawna lub nie zawiera danych.");

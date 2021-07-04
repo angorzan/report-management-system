@@ -1,19 +1,17 @@
 package WorbookProcessor;
 
 import org.apache.poi.ss.usermodel.*;
-import reportManagement.Menu;
 import reportManagement.ProjectTask;
+import reportManagement.Menu;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class WorkbookScanner {
 
-	public static void scanWorkbook(Path path) {
+	public static void scanWorkbook(Menu menu, Path path) {
 
 		Workbook workbook = WorkbookLoader.openWorkbook(path);
-		ArrayList<ProjectTask> list = Menu.getProjectTasks();
 
 		for (Sheet sheet : workbook) {
 
@@ -24,7 +22,9 @@ public class WorkbookScanner {
 					float hours = (float) row.getCell(2).getNumericCellValue();
 
 					Date date = (Date) row.getCell(0).getDateCellValue();
-					list.add(new ProjectTask(sheetName, employeeNameFormater(path), date, hours));
+
+					menu.addProjectTask(new ProjectTask(sheetName, employeeNameFormater(path), date, hours));
+
 				}
 			}
 		}
